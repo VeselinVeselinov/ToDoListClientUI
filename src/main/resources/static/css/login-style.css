@@ -1,0 +1,131 @@
+@font-face {
+    font-family: DripFont;
+    src: url("/fonts/drip.otf");
+}
+
+@font-face {
+    font-family: contentFont;
+    src: url("/fonts/content.ttf");
+}
+
+body{
+	background-image: url("/img/index/notebg.jpg");
+}
+
+#wrapper{
+    padding-top:52px;
+    padding-bottom: 52px;
+	width:76%;
+	margin: auto;
+}
+
+.random-info {
+    text-align: center;
+    padding: 10px;
+    background: rgb(247,247,247);
+    color: rgb(119,119,119);
+    font-family: DripFont;
+}
+
+#title-login {
+    background: rgb(245,160,7);
+    font-family: contentFont;
+}
+
+#main-part {
+    background: rgba(247,247,247,0.7);
+    width: 100%;
+    margin: auto;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+#login-section {
+    margin: auto;
+    font-size: 2vw;
+    text-align: center;
+    border-radius: 10px;
+    background: #000;
+    width: 44%;
+    min-height: 200px;
+}
+
+.label {
+    color: #FFF;
+    font-family: DripFont;
+}
+
+.label:first-child {
+    padding-top: 10px;
+}
+
+input{
+    margin: auto;
+}
+
+.input {
+    width: 100%;
+    margin: 0 auto;
+    font-family: contentFont;
+}
+
+.validation-message-wrong {
+    color: red;
+    font-family: DripFont;
+}
+
+.validation-message-wrong:last-child {
+    padding-bottom: 10px;
+}
+
+.error-message {
+    color: red;
+    font-family: DripFont;
+}
+
+.error-message:last-child {
+    padding-bottom: 10px;
+}
+
+.form-control{
+    padding: .75rem;
+    display: unset;
+    width: 62%;
+}
+
+#password{
+    margin-bottom: 18px;
+}
+
+#link-message a{
+    font-size: 1.5vw;
+    font-family: DripFont;
+    color: rgb(245,160,7);
+}
+
+#link-message a:hover{
+    text-decoration: none;
+    color: #FFF;
+}
+
+#submit-button {
+    width: 50%;
+    font-family: DripFont;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.8vw;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 884px) {
+    #login-section {
+        font-size: 3.4vw;
+        width: 55%;
+    }
+
+    #submit-button {
+        font-size: 3vw;
+    }
+}

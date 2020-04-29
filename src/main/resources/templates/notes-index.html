@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+        <!-- jquery script -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <title>Notes - client</title>
+
+        <!-- bootstrap css -->
+	    <link rel="stylesheet" 
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+		crossorigin="anonymous">
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="\css\index-style-test.css">
+    </head>
+
+    <body>
+
+        <div class="sticky-top">
+            <h1 style="text-align: center;
+                padding: 10px;
+                background: rgba(21,255,23,0.9);
+                color: rgb(247,247,247);
+                font-family: DripFont;
+                margin-bottom:0px;
+                padding-bottom:21px;" id="feedback" class="noedit">
+            </h1>
+        </div>
+        
+        <div class="sticky-top">
+            <h1 style="text-align: center;
+                padding: 10px;
+                background: rgba(255,21,23,0.8);
+                color: rgb(247,247,247);
+                font-family: DripFont;
+                margin-bottom:0px;
+                padding-bottom:21px;" id="feedback-failure" class="noedit">
+            </h1>
+        </div>
+
+        <div class="pos-f-t">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-dark p-4">
+                    <h4 class="text-white">Collapsed content</h4>
+                    <span class="text-muted">Toggleable via the navbar brand.</span>
+                </div>
+            </div>
+            <nav class="navbar navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </div>
+
+        <div id="overflow-fix">
+            <div id="left-nav" class="sticky-top">
+                <div id="enter-message">
+			        <h1> Making everything so simple! ►</h1>
+                </div>
+                <div id="main-menu" class="collapse">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link" th:href="@{/index(authToken=${param.authToken})}">Home</a>
+                        <a class="nav-link" th:href="@{/user/index(authToken=${param.authToken})}">Profile</a>
+                        <a class="nav-link" th:href="@{/note/index(authToken=${param.authToken})}">Notes</a>
+                        <a class="nav-link" th:href="@{/category/index(authToken=${param.authToken})}">Categories</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wrapper">
+
+                <div id="functionsCtrl">
+                    <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add note</button>
+                    <form class="form-inline my-2 my-lg-0" id="search-tool">
+                    	<select class="form-control" id="select-attribute">
+					      <option data="name">Note name</option>
+					      <option data="categoryName">Category</option>
+    					</select>
+                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick a filter and enter a value.." aria-label="Search" required>
+                        <button class="btn btn-secondary my-2 my-sm-0" id="search-submit">Search</button>
+                    </form>
+                </div>
+                
+                <ul id="entities"></ul>
+                <template id="entity-template">
+                    <li>
+                        <p>
+                            <strong>Note name: </strong>
+                            <span class="noedit name">{{name}}</span>
+                            <input class="edit name form-control" />
+                        </p>
+                        <p>
+                            <strong>Category: </strong>
+                            <span class="noedit cname">{{categoryName}}</span>
+                            <select class="edit cname form-control"></select>
+                        </p>
+                        <p>
+                            <strong>Content: </strong>
+                            <textarea class="noedit content form-control" readonly>{{text}}</textarea>
+                            <textarea class="edit content form-control"></textarea>
+                        </p>
+                        
+                        <p>
+                            <span class="super-secure identifier">{{id}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure statusId">{{statusId}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure accountId">{{accountId}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure typeId">{{typeId}}</span>
+                        </p>
+                        <button class="remove btn btn-warning">Delete</button>
+                        <button class="editEntity noedit btn btn-warning">Edit</button>
+                        <button class="saveEdit edit btn btn-warning">Save</button>
+                        <button class="cancelEdit edit btn btn-warning">Cancel</button>
+                    </li>
+                </template>
+            </div>
+
+            <div id="right-nav">
+		        <div>
+			        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <span>Hello, User</span>
+                        <span sec:authentication="name" class="super-secure" id="identifier"></span>
+                        <span class="super-secure" id="identifierAcc"></span>
+                        <a class="nav-link" th:href="@{/account/index(authToken=${param.authToken})}">Account</a>
+                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">User - admin panel</a>
+			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Account - admin panel</a>
+                        <a th:href="@{/menu/logout(authToken=${param.authToken})}" class="nav-link">Log out</a>
+			        </div>
+		        </div>
+	        </div>
+        </div>
+
+
+        <footer id="main-footer">
+            <hr id="line-footer" style="height:2px;
+                border-radius: 5px; background-color: rgba(52, 58, 64, 0.9); margin-top:15px;">
+            <p class="h2" th:text="${#execInfo.now.time}">- Vezo's To Do List</p>
+        </footer>
+        
+        <!-- custom js -->
+        <script src="/js/note/note-index.js"></script>
+
+        <!-- mustache script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
+
+        <!-- bootstrap scripts -->
+	    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+		crossorigin="anonymous"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+		crossorigin="anonymous"></script>
+    </body>
+</html>

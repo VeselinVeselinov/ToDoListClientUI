@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Client - Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <!-- jquery script -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- bootstrap css -->
+	<link rel="stylesheet" 
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+		crossorigin="anonymous">
+
+	<!-- custom css -->
+	<link rel="stylesheet" href="\css\register-style.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="random-info">
+            <h2 style="font-family:DripFont">◄ You are one step closer! ►</h2>
+        </div>
+
+        <div id="title-register">
+            <br />
+            <p class="h2 text-center"><b>ToDoList - Registration</b></p>
+            <br />
+        </div>
+
+        <section id="main-part">
+            <div id="register-section">
+                <form id="register" method="post">
+                    <div>
+                        <div id="feedback" class="validation-message-wrong">
+                            
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="fname" />First Name* :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="text" name="fname" id="fname" placeholder="Enter your first name.. " required >
+                            </div>
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="lname" />Last Name* :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="text" name="lname" id="lname" placeholder="Enter your last name.. " required >
+                            </div>
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="username" />Username * :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="text" name="username" id="username" placeholder="Enter your username.. " required 
+                                minlength="6">
+                            </div>
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="password" />Password* :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Enter your password.. " required 
+                                minlength="8">
+                            </div>
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="confpass" />Confirm pass* :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="password" name="confpass" id="confpass" placeholder="Confirm your password.. " required >
+                            </div>
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="email" />Email* :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email.. " required 
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                            </div>
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="phone" />Phone :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="tel" name="phone" id="phone" placeholder="Enter your phone - +359 xxx-xxx-xxx"
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" >
+                            </div>
+                        </div>
+
+                        <div class="oveflow-fix">
+                            <div class="label">
+                                <label for="address" />Address :
+                            </div>
+                            <div class="input">
+                                <input class="form-control" type="textarea" name="address" id="address" placeholder="Confirm your address.. ">
+                            </div>
+                        </div>
+
+                        <div>
+                            <input id="submit-button" type="submit" value="Register" />
+                        </div>
+                        
+                        <div id="link-message"><a href="/login">Already a member? Log in the system. </a></div>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div class="random-info">
+            <h2>◄ Keeping your ideas and plans organised is the key to success! ►</h2>
+        </div>
+    </div>
+
+    <!-- form validation script -->
+	<script type="text/javascript" src="/js/validation/replacementValidation.js">
+	</script>
+
+	<!-- register script -->
+	<script type="text/javascript" src="/js/register/register.js">
+	</script>
+	
+	<!-- bootstrap scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+		crossorigin="anonymous"></script>
+</body>
+</html>
+

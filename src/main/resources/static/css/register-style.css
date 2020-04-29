@@ -1,0 +1,135 @@
+@font-face {
+    font-family: DripFont;
+    src: url("/fonts/drip.otf");
+}
+
+@font-face {
+    font-family: contentFont;
+    src: url("/fonts/content.ttf");
+}
+
+body{
+	background-image: url("/img/index/notebg.jpg");
+}
+
+#wrapper{
+    padding-top:52px;
+    padding-bottom: 52px;
+	width:76%;
+	margin: auto;
+}
+
+.random-info {
+    text-align: center;
+    padding: 10px;
+    background: rgb(247,247,247);
+    color: rgb(119,119,119);
+    font-family: DripFont;
+}
+
+#title-register {
+    background: rgb(245,160,7);
+    font-family: contentFont;
+}
+
+#main-part {
+    background: rgba(247,247,247,0.7);
+    width: 100%;
+    margin: auto;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+#register-section {
+    margin: auto;
+    font-size: 2vw;
+    text-align: center;
+    border-radius: 10px;
+    background: #000;
+    width: 54%;
+    min-height: 200px;
+}
+
+.label {
+    text-align: right;
+    float: left;
+    width: 31%;
+    color: #FFF;
+    font-family: DripFont;
+}
+
+.input {
+    width:57%;
+    float:right;
+    margin-top:10px;
+    margin-right:40px;
+    font-family: contentFont;
+}
+
+.oveflow-fix{
+    margin:auto;
+}
+
+.oveflow-fix:after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.validation-message-wrong {
+    text-align: center;
+    padding-top:65px;
+    color: red;
+    font-family: DripFont;
+    padding-bottom:20px;
+}
+
+.validation-message-wrong:first-child {
+    padding-top: 20px;
+}
+
+.error-message {
+    color: red;
+    font-family: DripFont;
+}
+
+.error-message:last-child {
+    padding-bottom: 10px;
+}
+
+#link-message{
+    padding-bottom: 20px;
+}
+
+#link-message a{
+    font-size: 1.9vw;
+    font-family: DripFont;
+    color: rgb(245,160,7);
+}
+
+#link-message a:hover{
+    text-decoration: none;
+    color: #FFF;
+}
+
+#submit-button {
+    width: 50%;
+    font-family: DripFont;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.8vw;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 884px) {
+    #register-section {
+        font-size: 3.5vw;
+        width: 88%;
+    }
+
+    #submit-button {
+        font-size: 3.8vw;
+    }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login - Section</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- jquery script -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- bootstrap css -->
+	<link rel="stylesheet" 
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+		crossorigin="anonymous">
+
+	<!-- custom css -->
+	<link rel="stylesheet" href="\css\login-style.css">
+</head>
+
+<body>
+
+	<div id="wrapper">
+	    <div class="random-info">
+	        <h2 style="font-family:DripFont">? This is a random easter egg page! ?</h2>
+	    </div>
+	    
+	    <div id="title-login">
+	        <br />
+	        <p class="h2 text-center"><b>ToDoList - Kinda similar eh</b></p>
+	        <br />
+		</div>
+		
+	    <section id="main-part">
+	        <div id="login-section">
+	            <form id="login" method="POST">
+	                <div>
+	                    <div>
+	                        <div class="label">
+	                            <label for="username" />Username:  
+	                        </div>
+	                        <div class="input">
+								<input class="form-control" type="text" name="username" id="username" placeholder="Enter your username.. " required >
+	                        </div>
+	                    </div>
+	                    <div>
+	                        <div class="label">
+	                            <label for="password" />Password:
+	                        </div>
+	                        <div class="input">
+								<input class="form-control" type="password" id="password" name="password" placeholder="Enter your password.. " required 
+								minlength="8">
+	                        </div>
+	                    </div>
+	                    <div>
+							<input id="submit-button" value="login" type="submit"/>
+						</div>
+						
+						<div id="link-message"><a href="/register">Don't have an account? Register now. </a></div>
+
+	                    <div id="feedback" class="validation-message-wrong" >
+	
+	                    </div>
+	                </div>
+	            </form>
+	        </div>
+		</section>
+		
+	    <div class="random-info">
+	        <h2>? Keeping your ideas and plans organised is the key to success! ?</h2>
+	    </div>
+	</div>
+
+	<!-- form validation script -->
+	<script type="text/javascript" src="/js/validation/replacementValidation.js">
+	</script>
+
+	<!-- logout script -->
+	<script type="text/javascript" src="/js/logout/logout.js">
+	</script>
+	
+	<!-- bootstrap scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+		crossorigin="anonymous"></script>
+</body>
+</html>

@@ -268,7 +268,8 @@ $(function (){
             address: $li.find('input.address').val(),
             statusId: parseInt($li.find('span.statusId').html()),
             userId: parseInt($li.find('span.userId').html()),
-            active: 1
+            active: 1,
+            description: $li.find('span.description').html()
         }
 
         $.ajax({

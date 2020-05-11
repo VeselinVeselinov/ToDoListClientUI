@@ -19,26 +19,35 @@
     </head>
 
     <body>
-
+    
+	<div id="page-wrapper">
+		<div>
+			<div class="modal" id="modal-note-type" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLongTitle">Pick a note type you desire to create.</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body" id="types-mb">
+			        
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" id="exit-modal" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(21,255,23,0.9);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback" class="noedit">
+            <h1 id="feedback" class="noedit">
             </h1>
         </div>
         
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(255,21,23,0.8);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback-failure" class="noedit">
+            <h1 id="feedback-failure" class="noedit">
             </h1>
         </div>
 
@@ -72,9 +81,12 @@
             </div>
 
             <div id="wrapper">
-
+				<div id="enter-message">
+			        <h1> My notes - management panel</h1>
+                </div>
                 <div id="functionsCtrl">
                     <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add note</button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="add-note-typed" data-toggle="modal" data-target="#modal-note-type">Add typed note</button>
                     <form class="form-inline my-2 my-lg-0" id="search-tool">
                     	<select class="form-control" id="select-attribute">
 					      <option data="name">Note name</option>
@@ -86,12 +98,31 @@
                 </div>
                 
                 <ul id="entities"></ul>
+                
+                <template id="types-template">
+                	<button type="button" data-id="{{id}}" class="btn btn-warning choose-ntype" >{{name}}</button>
+                </template>
+                
+                <template id="note-tasks-template">
+                	<div class="single-task" data-task={{id}}>
+	                	<input class="form-check-input noedit" type="checkbox" value="" disabled>
+	                	<span class="noedit text-task" data-id="{{id}}">{{text}}</span>
+	                	<input class="form-check-input edit" type="checkbox" value="">
+	                	<input class="edit text-task form-control" data-id="{{id}}"/>
+	                	<button class="edit btn btn-danger removeTask"> X </button>
+	            	</div>
+                </template>
+                
                 <template id="entity-template">
                     <li>
                         <p>
                             <strong>Note name: </strong>
                             <span class="noedit name">{{name}}</span>
                             <input class="edit name form-control" />
+                        </p>
+                        <p>
+                            <strong>Note type: </strong>
+                            <span class="non-editable">{{typeName}}</span>
                         </p>
                         <p>
                             <strong>Category: </strong>
@@ -122,6 +153,99 @@
                         <button class="cancelEdit edit btn btn-warning">Cancel</button>
                     </li>
                 </template>
+                
+                <template id="img-note-template">
+                    <li>
+                    <div class="img-note-overflow">
+                    <div class="content-img-notet">
+                        <p>
+                            <strong>Note name: </strong>
+                            <span class="noedit name">{{name}}</span>
+                            <input class="edit name form-control" />
+                        </p>
+                        <p>
+                            <strong>Note type: </strong>
+                            <span class="non-editable">{{typeName}}</span>
+                        </p>
+                        <p>
+                            <strong>Category: </strong>
+                            <span class="noedit cname">{{categoryName}}</span>
+                            <select class="edit cname form-control"></select>
+                        </p>
+                        <p>
+                            	<strong class="content-title-img">Content: </strong>
+	                            
+	                            <textarea class="noedit img-note content form-control" readonly>{{text}}</textarea>
+	                            <textarea class="edit img-note content form-control"></textarea>
+                        </p>
+                        
+                        <p>
+                            <span class="super-secure identifier">{{id}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure statusId">{{statusId}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure accountId">{{accountId}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure typeId">{{typeId}}</span>
+                        </p>
+                        </div>
+                        <div class="img-section">
+                        	<img alt="https://cdn.dribbble.com/users/1963449/screenshots/5915645/404_not_found.png" src="{{url}}" class="img-fluid img-content">
+                        </div>
+                        
+                        </div>
+                        <button class="remove btn btn-warning">Delete</button>
+                        <button class="editEntity noedit btn btn-warning">Edit</button>
+                        <button class="saveEdit edit btn btn-warning">Save</button>
+                        <button class="cancelEdit edit btn btn-warning">Cancel</button>
+                        <label class="edit url-src" data-url="{{url}}">Image Url:</label>
+                        <input class="edit form-control url-image" />
+                    </li>
+                </template>
+                
+                <template id="todolist-template">
+                    <li>
+                        <p>
+                            <strong>Note name: </strong>
+                            <span class="noedit name">{{name}}</span>
+                            <input class="edit name form-control" />
+                        </p>
+                        <p>
+                            <strong>Note type: </strong>
+                            <span class="non-editable">{{typeName}}</span>
+                        </p>
+                        <p>
+                            <strong>Category: </strong>
+                            <span class="noedit cname">{{categoryName}}</span>
+                            <select class="edit cname form-control"></select>
+                        </p>
+                        <div class="note-tasks-content" data-id="{{id}}">
+                        	<input type="text" class="target-element" style="display:none;">
+                        </div>
+                        
+                        <p>
+                            <span class="super-secure identifier">{{id}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure statusId">{{statusId}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure accountId">{{accountId}}</span>
+                        </p>
+                        <p>
+                            <span class="super-secure typeId">{{typeId}}</span>
+                        </p>
+                        
+                        <button class="remove btn btn-warning">Delete</button>
+                        <button class="editEntity noedit btn btn-warning">Edit</button>
+                        <button class="saveEdit edit btn btn-warning">Save</button>
+                        <button class="cancelEdit edit btn btn-warning">Cancel</button>
+                        <button class="addNoteTask edit btn btn-warning">Add note task</button>
+                    </li>
+                </template>
             </div>
 
             <div id="right-nav">
@@ -130,6 +254,8 @@
                         <span>Hello, User</span>
                         <span sec:authentication="name" class="super-secure" id="identifier"></span>
                         <span class="super-secure" id="identifierAcc"></span>
+                        <button class="super-secure" id="image-note-add"></button>
+                        <button class="super-secure" id="todolist-add"></button>
                         <a class="nav-link" th:href="@{/account/index(authToken=${param.authToken})}">Account</a>
                         <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">User - admin panel</a>
 			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Account - admin panel</a>
@@ -145,6 +271,7 @@
                 border-radius: 5px; background-color: rgba(52, 58, 64, 0.9); margin-top:15px;">
             <p class="h2" th:text="${#execInfo.now.time}">- Vezo's To Do List</p>
         </footer>
+        </div>
         
         <!-- custom js -->
         <script src="/js/note/note-index.js"></script>

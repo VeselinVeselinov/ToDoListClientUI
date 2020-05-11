@@ -28,6 +28,48 @@
   </nav>
 </div>
 
+			<div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLongTitle">Basic rundown of what the system's aim is.</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p>This system is a response to the modern person's needs. 
+			        Everyday we tend to get lost in the hustle and bustle of the city
+			        and forget to keep track on our plans and goals... And that's why we
+			        are here - to <strong>capture the moment</strong>. This system allows extremely easy
+			        on the go use - you can store your spontaneous thoughts right away with just 
+			        a few clicks, it's not only that, but the system also allows a variety 
+			        of different ways to organize and prioritize everything.
+			        </p>
+			        <span>
+			        	You have your own personal note blog and have the opportunity to easily store and access your data in three different note types:
+			        	<br />
+			        	<br />
+				    - <strong>Plain Text</strong> - Consists of text only, perfect for a quick idea sketching.
+				    	<br />
+				    - <strong>Image Note</strong> - Consists of text and one image that can be attached to the note via link.
+				    	<br />
+				    - <strong>To Do List</strong> - Consists of taks you can edit and achieve of course.
+						<br />
+						<br />
+					Given that, the whole concept of this project is to create a virtual library by giving the client his necessary
+					needs to do so - you can store images, goals, plans or anything text related at all, 
+					you can filter your library by different custom categories you create so that you can always find things the way <strong>YOU</strong> organized them. 
+					We provide the tools and now it is all up to you to start pilling up your library with notes.
+			        </span>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" id="exit-modal" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
 <div id="overflow-fix">
 	<div id="left-nav" class="sticky-top">
 		<div id="main-menu" class="collapse">
@@ -94,7 +136,7 @@
 					<br />
 					<br />
 				</p>
-				<p><a class="btn btn-dark register" id="first-info-button" href="/Home/Register">Care to know more? &raquo;</a></p>
+				<p><a class="btn btn-dark" id="first-info-button" data-toggle="modal" data-target="#modal-info">Care to know more? &raquo;</a></p>
 			</div>
 		
 			<div class="col-md-4">

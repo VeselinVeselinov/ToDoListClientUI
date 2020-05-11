@@ -72,7 +72,9 @@
             </div>
 
             <div id="wrapper">
-
+				<div id="enter-message">
+			        <h1> My account - management panel</h1>
+                </div>
                 <!-- <div id="functionsCtrl">
                     <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add account</button>
                     <form class="form-inline my-2 my-lg-0" id="search-tool">
@@ -92,54 +94,63 @@
                 <ul id="entities"></ul>
                 <template id="entity-template">
                     <li>
-                        <p>
-                            <strong>Account name: </strong>
-                            <span class="noedit name">{{name}}</span>
-                            <input class="edit name form-control" />
-                        </p>
-                        <p>
-                            <strong>First Name: </strong>
-                            <span class="noedit fname">{{firstName}}</span>
-                            <input class="edit fname form-control" />
-                        </p>
-                        <p>
-                            <strong>Last Name: </strong>
-                            <span class="noedit lname">{{lastName}}</span>
-                            <input class="edit lname form-control" />
-                        </p>
-                        <p>
-                            <strong>Email: </strong>
-                            <span class="noedit email">{{email}}</span>
-                            <input class="edit email form-control" />
-                        </p>
-                        <p>
-                            <strong>Phone: </strong>
-                            <span class="noedit phone">{{phone}}</span>
-                            <input class="edit phone form-control" />
-                        </p>
-                        <p>
-                            <strong>Address: </strong>
-                            <span class="noedit address">{{address}}</span>
-                            <input class="edit address form-control" />
-                        </p>
-                        <p>
-                            <strong>Status Name: </strong>
-                            <span class="noedit sname">{{statusName}}</span>
-                            <input class="edit sname form-control" />
-                        </p>
-                        <p>
-                            <span class="super-secure identifier">{{id}}</span>
-                        </p>
-                        <p>
-                            <span class="super-secure statusId">{{statusId}}</span>
-                        </p>
-                        <p>
-                            <span class="super-secure userId">{{userId}}</span>
-                        </p>
+                    <div class="img-note-overflow">
+                    	<div class="content-img-notet">
+	                        <p>
+	                            <strong>Account name: </strong>
+	                            <span class="noedit name" style="font-size: 1.56rem;">{{name}}</span>
+	                            <input class="edit name form-control" style="width: 53%;" />
+	                        </p>
+	                        <p>
+	                            <strong>First Name: </strong>
+	                            <span class="noedit fname" style="font-size: 1.56rem;">{{firstName}}</span>
+	                            <input class="edit fname form-control" style="width: 53%;" />
+	                        </p>
+	                        <p>
+	                            <strong>Last Name: </strong>
+	                            <span class="noedit lname" style="font-size: 1.56rem;">{{lastName}}</span>
+	                            <input class="edit lname form-control" style="width: 53%;" />
+	                        </p>
+	                        <p>
+	                            <strong>Email: </strong>
+	                            <span class="noedit email" style="font-size: 1.56rem;">{{email}}</span>
+	                            <input class="edit email form-control" style="width: 53%;" />
+	                        </p>
+	                        <p>
+	                            <strong>Phone: </strong>
+	                            <span class="noedit phone" style="font-size: 1.56rem;">{{phone}}</span>
+	                            <input class="edit phone form-control" style="width: 53%;" />
+	                        </p>
+	                        <p>
+	                            <strong>Address: </strong>
+	                            <span class="noedit address" style="font-size: 1.56rem;">{{address}}</span>
+	                            <input class="edit address form-control" style="width: 53%;" />
+	                        </p>
+	                        <p>
+	                            <strong>Status Name: </strong>
+	                            <span class="noedit sname" style="font-size: 1.56rem;">{{statusName}}</span>
+	                            <input class="edit sname form-control" style="width: 53%;" />
+	                        </p>
+	                        <p>
+	                            <span class="super-secure identifier">{{id}}</span>
+	                        </p>
+	                        <p>
+	                            <span class="super-secure statusId">{{statusId}}</span>
+	                        </p>
+	                        <p>
+	                            <span class="super-secure userId">{{userId}}</span>
+	                        </p>
+	                    </div>
+                        <div class="img-section">
+                        	<img alt="https://cdn.dribbble.com/users/1963449/screenshots/5915645/404_not_found.png" src="{{description}}" class="img-fluid img-content">
+                        </div>
+                  	</div>      
                         <button class="remove btn btn-warning">Delete</button>
                         <button class="editEntity noedit btn btn-warning">Edit</button>
                         <button class="saveEdit edit btn btn-warning">Save</button>
                         <button class="cancelEdit edit btn btn-warning">Cancel</button>
+                        <label class="edit url-src" data-url="{{description}}" style="margin-top: 10px;">Image Url:</label>
+                        <input class="edit form-control url-image" value="{{description}}"/>
                     </li>
                 </template>
             </div>

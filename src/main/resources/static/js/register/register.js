@@ -32,7 +32,8 @@ function sendRegisterRequest() {
 		lastName: lname,
 		email: email,
 		phone: phone,
-        address: address
+        address: address,
+        description: "https://cdn.iconscout.com/icon/free/png-512/avatar-375-456327.png"
     };
 
     $.ajax({

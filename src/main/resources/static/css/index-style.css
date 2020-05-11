@@ -130,6 +130,10 @@ body{
     text-align: center;
 }
 
+a#first-info-button {
+    color: #fff;
+}
+
 #overflow-fix{
 	padding-bottom: 15px;
 }

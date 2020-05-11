@@ -87,7 +87,8 @@ $(function (){
             address: $li.find('input.address').val(),
             statusId: parseInt($li.find('span.statusId').html()),
             userId: parseInt($li.find('span.userId').html()),
-            active: 1
+            active: 1,
+            description: $li.find('input.edit.form-control.url-image').val()
         }
 
         $.ajax({
@@ -108,11 +109,13 @@ $(function (){
             $li.find('span.email').html(account.email);
             $li.find('span.phone').html(account.phone);
             $li.find('span.address').html(account.address);
+            $li.find('input.edit.form-control.url-image').val(account.description);
+            $li.find('.img-fluid.img-content').attr('src', account.description);
             $li.removeClass('edit');
 
             $("#feedback").html(Response);
-            $("#feedback").delay(3).fadeIn();
-            $("#feedback").delay(6000).fadeOut();
+            $("#feedback").delay(300).fadeIn();
+            $("#feedback").delay(2000).fadeOut();
         },
         error: function(error) {
 

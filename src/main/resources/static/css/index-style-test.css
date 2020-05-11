@@ -8,6 +8,26 @@
     src: url("/fonts/content.ttf");
 }
 
+#feedback{
+	text-align: center;
+    padding: 10px;
+    background: rgba(21,255,23,0.9);
+    color: rgb(247,247,247);
+    font-family: DripFont;
+    margin-bottom:0px;
+    padding-bottom:21px;
+}
+
+#feedback-failure{
+	text-align: center;
+    padding: 10px;
+    background: rgba(255,21,23,0.8);
+    color: rgb(247,247,247);
+    font-family: DripFont;
+    margin-bottom:0px;
+    padding-bottom:21px;
+}
+
 body{
 	background-image: url("/img/index/notebg.jpg");
 }
@@ -20,6 +40,14 @@ body{
     font-family:DripFont;
 }
 
+#wrapper div#enter-message {
+    background: rgba(219, 193, 150, 0.3);
+}
+
+#types-mb button{
+	width:31%;
+}
+
 #wrapper{
     background: rgba(255,255,255,0.8);
 	float: left;
@@ -28,9 +56,16 @@ body{
 }
 
 #add-acc{
+	margin-right: 10px;
 	float:left;
-	width: 32%;
+	width: 16%;
 }
+
+#add-note-typed{
+	float:left;
+	width:16%;
+}
+
 
 #add-user{
 	float:left;
@@ -159,6 +194,10 @@ h1#feedback-failure.noedit {
     display: none;
 }
 
+button.super-secure{
+	display: none;
+}
+
 ul li .edit{
     display: none;
 }
@@ -200,6 +239,85 @@ span.noedit{
     margin-left: 11px;
     font-size: 1.5vw;
     font-family: DripFont;
+}
+
+.non-editable{
+	margin-left: 11px;
+    font-size: 1.5vw;
+    font-family: DripFont;
+}
+
+textarea.noedit.img-note.content.form-control {
+    width: 100%;
+}
+
+textarea.edit.img-note.content.form-control {
+    width: 100%;
+}
+
+img.img-fluid.img-content {
+    border-radius: 5px;
+}
+
+label.edit{
+	margin-left:155px;
+}
+
+.input.edit.url-img{
+	margin-left:35px;
+}
+
+.img-note-overflow:after{
+	content: "";
+  	clear: both;
+  	display: table;
+}
+
+.content-img-notet {
+    float: left;
+    width: 50%;
+}
+
+.note-tasks-content {
+    margin-top: 10px;
+    padding: 12px;
+    min-height: 340px;
+    width: 83%;
+    background: #fff;
+    color: #000;
+    margin-left: 90px;
+    border-radius: 5px;
+}
+
+input[type=checkbox] {
+    -ms-transform: scale(2);
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(3);
+    padding: 10px;
+}
+
+input.form-check-input.edit {
+    position: sticky;
+    margin-left: 10px;
+    margin-right: 10px;
+   
+}
+
+input.form-check-input.noedit {
+    position: sticky;
+    margin-left: 10px;
+    margin-bottom: 15.2px;
+}
+
+button.edit.btn.btn-danger.removeTask {
+    margin-bottom: 5px;
+}
+
+.img-section {
+    width: 40%;
+    float: right;
 }
 
 button.btn.btn-warning {

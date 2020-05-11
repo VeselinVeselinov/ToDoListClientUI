@@ -73,14 +73,19 @@ $(function (){
         var $li = $(this).closest('li');
         var id = parseInt($li.find('span.identifier').html());
 
+        
         var user = {
             userName: $li.find('input.name').val(),
             password: $li.find('input.pass').val(),
             statusId: parseInt($li.find('span.statusId').html()),
             active: 1
         }
+        
+        if($li.find('input.pass').val().length < 8){$("#feedback-failure").html("Password must be at least 8 symbols! ");
+        $("#feedback-failure").delay(300).fadeIn();
+        $("#feedback-failure").delay(2000).fadeOut();}
 
-        $.ajax({
+        else { $.ajax({
         type: "PUT",
         contentType: "application/json",
         url: "https://localhost:44321/api/User/UpdateItem/" + id,
@@ -97,14 +102,14 @@ $(function (){
             $li.removeClass('edit');
 
             $("#feedback").html(Response);
-            $("#feedback").delay(3).fadeIn();
-            $("#feedback").delay(6000).fadeOut();
+            $("#feedback").delay(300).fadeIn();
+            $("#feedback").delay(2000).fadeOut();
         },
         error: function(error) {
 
             alert(error.responseText);
             
         }
-        });
+        }); }
     });
 });

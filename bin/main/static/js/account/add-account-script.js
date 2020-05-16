@@ -19,7 +19,7 @@ function sendRegisterRequest() {
 	var email = $("#email").val();
 	var phone = $("#phone").val();
 	var address = $("#address").val();
-	var description = $("#description").val();
+	var profilePic = $("#description").val();
 
 	var account = {
 		name: username,
@@ -28,7 +28,7 @@ function sendRegisterRequest() {
 		email: email,
 		phone: phone,
         address: address,
-        description: description 
+        description: profilePic 
     };
 
     $.ajax({
@@ -44,7 +44,7 @@ function sendRegisterRequest() {
         timeout: 600000,
         success: function (Response) {
         	
-        	var url = "accountadmin/index?authToken=" + token;
+        	var url = "/accountadmin/index?authToken=" + token;
             return window.location = url;
 
         },

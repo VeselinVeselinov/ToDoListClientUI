@@ -58,14 +58,8 @@ body{
 #add-acc{
 	margin-right: 10px;
 	float:left;
-	width: 16%;
+	width: 15%;
 }
-
-#add-note-typed{
-	float:left;
-	width:16%;
-}
-
 
 #add-user{
 	float:left;
@@ -85,7 +79,7 @@ body{
 	background: rgba(245,160,7, 0.4);
 }
 
-#functionsCtrl{
+#functionsCtrl:after{
 	content: "";
   	clear: both;
   	display: table;
@@ -93,17 +87,19 @@ body{
 
 #select-attribute{
 	font-size: 1.5vw;
-	width:30%;
+	width: 30%;
 	margin-right: 10px;
+	margin-left: 49.7px;
 }
 
 input.form-control.mr-sm-2 {
 	font-size: 1.3vw;
     width: 40%;
+    height: 49px;
 }
 
 button.btn.btn-secondary.my-2.my-sm-0 {
-	font-size: 1.3vw;
+	font-size: 1.4rem;
     width: 18%;
 }
 

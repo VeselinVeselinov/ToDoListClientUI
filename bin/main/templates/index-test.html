@@ -16,29 +16,18 @@
 
         <!-- custom css -->
         <link rel="stylesheet" href="\css\index-style-test.css">
+    	<link rel="stylesheet" href="\css\account\account-admin-style.css">
     </head>
 
     <body>
 
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(21,255,23,0.9);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback" class="noedit">
+            <h1 id="feedback" class="noedit">
             </h1>
         </div>
         
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(255,21,23,0.8);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback-failure" class="noedit">
+            <h1 id="feedback-failure" class="noedit">
             </h1>
         </div>
 
@@ -72,6 +61,9 @@
             </div>
 
             <div id="wrapper">
+            	<div id="enter-message">
+			        <h1> System acounts - admin panel</h1>
+                </div>
 
                 <div id="functionsCtrl">
                     <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add account</button>
@@ -92,57 +84,63 @@
                 <ul id="entities"></ul>
                 <template id="entity-template">
                     <li>
-                        <p>
-                            <strong>Account name: </strong>
-                            <span class="noedit name">{{name}}</span>
-                            <input class="edit name form-control" />
-                        </p>
-                        <p>
-                            <strong>First Name: </strong>
-                            <span class="noedit fname">{{firstName}}</span>
-                            <input class="edit fname form-control" />
-                        </p>
-                        <p>
-                            <strong>Last Name: </strong>
-                            <span class="noedit lname">{{lastName}}</span>
-                            <input class="edit lname form-control" />
-                        </p>
-                        <p>
-                            <strong>Email: </strong>
-                            <span class="noedit email">{{email}}</span>
-                            <input class="edit email form-control" />
-                        </p>
-                        <p>
-                            <strong>Phone: </strong>
-                            <span class="noedit phone">{{phone}}</span>
-                            <input class="edit phone form-control" />
-                        </p>
-                        <p>
-                            <strong>Address: </strong>
-                            <span class="noedit address">{{address}}</span>
-                            <input class="edit address form-control" />
-                        </p>
-                        <p>
-                            <strong>Status Name: </strong>
-                            <span class="noedit sname">{{statusName}}</span>
-                            <input class="edit sname form-control" />
-                        </p>
-                        <p>
-                            <span class="super-secure identifier">{{id}}</span>
-                        </p>
-                        <p>
-                            <span class="super-secure statusId">{{statusId}}</span>
-                        </p>
-                        <p>
-                            <span class="super-secure userId">{{userId}}</span>
-                        </p>
-                        <p>
-                            <span class="super-secure description">{{description}}</span>
-                        </p>
+                    	<div class="img-note-overflow">
+                    		<div class="content-img-notet">
+		                        <p>
+		                            <strong>Account name: </strong>
+		                            <span class="noedit name">{{name}}</span>
+		                            <input class="edit name form-control" />
+		                        </p>
+		                        <p>
+		                            <strong>User: </strong>
+		                            <span class="noedit user">{{userName}}</span>
+		                            <select class="edit user form-control"></select>
+		                        </p>
+		                        <p>
+		                            <strong>First Name: </strong>
+		                            <span class="noedit fname">{{firstName}}</span>
+		                            <input class="edit fname form-control" />
+		                        </p>
+		                        <p>
+		                            <strong>Last Name: </strong>
+		                            <span class="noedit lname">{{lastName}}</span>
+		                            <input class="edit lname form-control" />
+		                        </p>
+		                        <p>
+		                            <strong>Email: </strong>
+		                            <span class="noedit email">{{email}}</span>
+		                            <input class="edit email form-control" />
+		                        </p>
+		                        <p>
+		                            <strong>Phone: </strong>
+		                            <span class="noedit phone">{{phone}}</span>
+		                            <input class="edit phone form-control" />
+		                        </p>
+		                        <p>
+		                            <strong>Address: </strong>
+		                            <span class="noedit address">{{address}}</span>
+		                            <input class="edit address form-control" />
+		                        </p>
+		                        <p>
+		                            <strong>Status: </strong>
+		                            <span class="noedit staName">{{statusName}}</span>
+		                            <select class="edit staName form-control"></select>
+		                        </p>
+		                        <p>
+		                            <span class="super-secure identifier">{{id}}</span>
+		                        </p>
+                     		</div>
+	                        <div class="img-section">
+	                        	<img alt="The image does not exist or has failed to load." src="{{description}}" class="img-fluid img-content"
+	                        	onerror="this.src='/img/error/img-error.png'">
+	                        </div>
+                        </div>
                         <button class="remove btn btn-warning">Delete</button>
                         <button class="editEntity noedit btn btn-warning">Edit</button>
                         <button class="saveEdit edit btn btn-warning">Save</button>
                         <button class="cancelEdit edit btn btn-warning">Cancel</button>
+                        <label class="edit url-src" data-url="{{description}}" style="margin-top: 10px;">Image Url:</label>
+                        <input class="edit form-control url-image" value="{{description}}"/>
                     </li>
                 </template>
             </div>
@@ -166,6 +164,10 @@
                 border-radius: 5px; background-color: rgba(52, 58, 64, 0.9); margin-top:15px;">
             <p class="h2" th:text="${#execInfo.now.time}">- Vezo's To Do List</p>
         </footer>
+        
+        <!-- handlers -->
+        <script src="/js/common/RequestHandler.js"></script>
+        <script src="/js/common/RenderHandler.js"></script>
         
         <!-- custom js -->
         <script src="/js/test/index-script-test.js"></script>

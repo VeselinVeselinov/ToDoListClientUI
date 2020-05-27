@@ -15,30 +15,19 @@
 		crossorigin="anonymous">
 
         <!-- custom css -->
-        <link rel="stylesheet" href="\css\index-style-test.css">
+        <link rel="stylesheet" href="\css\common\base-list-style.css">
+        <link rel="stylesheet" href="\css\user\user-client-style.css">
     </head>
 
     <body>
 
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(21,255,23,0.9);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback" class="noedit">
+            <h1 id="feedback" class="noedit">
             </h1>
         </div>
         
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(255,21,23,0.8);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback-failure" class="noedit">
+            <h1 id="feedback-failure" class="noedit">
             </h1>
         </div>
 
@@ -71,11 +60,28 @@
                 </div>
             </div>
 
-            <div id="wrapper" style="min-height: 383px;">
-                <div id="enter-message" style="margin-bottom: 58px;">
-			        <h1>◄ User management - feel free to change your username/password when you have the need to! ►</h1>
+            <div id="wrapper">
+                <div id="enter-message">
+			        <h1>My profile - management panel</h1>
                 </div>
                 <ul id="entities"></ul>
+                <div class="jumbotron jumbotron-fluid">
+  					<div class="container">
+   					 <h1 class="display-4">Tip</h1>
+    					<p class="lead">
+    					In this panel you can freely edit your password and username and in 
+    					order to do so you have to :
+    					<br/>
+    						- use a username that is unique
+    						<br/>
+    						- passwords must be at leasst 8 symbols long
+    						<br/>
+    						- password must be changed from it's default ******* value
+    						<br/>
+    						- password must contain at least one number and a capital letter
+    					</p>
+  					</div>
+				</div>
                 <template id="entity-template">
                     <li>
                         <p>
@@ -94,7 +100,6 @@
                         <p>
                             <span class="super-secure statusId">{{statusId}}</span>
                         </p>
-                        <button class="remove btn btn-warning">Delete</button>
                         <button class="editEntity noedit btn btn-warning">Edit</button>
                         <button class="saveEdit edit btn btn-warning">Save</button>
                         <button class="cancelEdit edit btn btn-warning">Cancel</button>
@@ -108,8 +113,8 @@
                         <span>Hello, User</span>
                         <span sec:authentication="name" class="super-secure" id="identifier"></span>
                         <a class="nav-link" th:href="@{/account/index(authToken=${param.authToken})}">Account</a>
-                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">User - admin panel</a>
-			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Account - admin panel</a>
+                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Users - admin</a>
+			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Accounts - admin</a>
                         <a th:href="@{/menu/logout(authToken=${param.authToken})}" class="nav-link">Log out</a>
 			        </div>
 		        </div>
@@ -122,6 +127,10 @@
                 border-radius: 5px; background-color: rgba(52, 58, 64, 0.9); margin-top:15px;">
             <p class="h2" th:text="${#execInfo.now.time}">- Vezo's To Do List</p>
         </footer>
+        
+        <!-- handlers -->
+        <script src="/js/common/RequestHandler.js"></script>
+        <script src="/js/common/RenderHandler.js"></script>
         
         <!-- form validation script -->
 		<script type="text/javascript" src="/js/validation/replacementValidation.js">

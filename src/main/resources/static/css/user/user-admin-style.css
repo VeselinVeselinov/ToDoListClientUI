@@ -1,0 +1,14 @@
+#add-user{
+	width: 20%;
+	font-size: 1.4rem;
+}
+
+#list-all{
+	width: 20%;
+	font-size: 1.4rem;
+	margin-left: 10px;
+}
+
+input.form-control.mr-sm-2{
+	font-size: 1.4rem;
+}

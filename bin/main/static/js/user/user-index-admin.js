@@ -1,20 +1,46 @@
 $(function (){
-    const urlParams = new URLSearchParams(window.location.search);
-	const token = urlParams.get('authToken');
+	/* authentication token */
+	const token = getAuthToken();
 
+	/* users container */
     var $entities = $('#entities');
-    var entitiesTemplate = $('#entity-template').html();
-    var addTemplate = $('#adding-template').html();
-
-    function addEntity(entity){
-        $entities.append(Mustache.render(entitiesTemplate, entity));
-    }
     
+    /* templates */
+    var entitiesTemplate = $('#entity-template').html();
+    
+    $('[data-toggle="tooltip"]').tooltip();
+    
+    /* This is the initial user seeding - it sends a list all request to the api
+     * and renders the response if it successful with Mustache.js */
+    sendGetRequest("User/ListAll", function (users) {
+        $.each(users, function(i, user){
+        	renderTemplate(entitiesTemplate, user, $entities);
+        })
+    });
+    
+    /* This function simply redirects the admin to a user creation form. */
     $('#add-user').click(function(){
     	var url = "/user/add?authToken=" + token;
+    	
         return window.location = url;
     });
     
+    $('#list-all').click(function(){
+    	sendGetRequest("User/ListAll", function (users) {
+    		$('li').remove();
+    		
+            $.each(users, function(i, user){
+            	renderTemplate(entitiesTemplate, user, $entities);
+            })
+            
+            renderResponeMessage("#feedback", 
+            		"All of the system's users are currently shown to display. ");
+        });
+    })
+    
+    /* This script functions as a search engine - the admin picks a filter, enters a value
+     * and sends a get request to the server, after which if the sought after user/s truly
+     * exists - will be displayed via Mustache.js rendering. */
     $('#search-submit').click(function(event){
     	event.preventDefault();
     	
@@ -22,166 +48,121 @@ $(function (){
     	var value = $('#search-tool input').val();
     	
     	if(value.length == 0){
-    		$('#feedback-failure').html("Please enter a value in order to use the search tool.");
-    	    $("#feedback-failure").delay(3).fadeIn();
-    	    $("#feedback-failure").delay(6000).fadeOut();
+    		renderResponeMessage('#feedback-failure', 
+    				"Please enter a value in order to use the search tool.");
     	}
     	else{
-    		var url = "FindExt?fieldName=" + filter + "&value="+value;
+    		var searchUrl = "User/FindExt?fieldName=" + filter + "&value=" + value;
     		
-    		$.ajax({
-    	        type: "GET",
-    	        url: "https://localhost:44321/api/User/" + url,
-    	        headers: {
-    	            "AuthToken": token
-    	        },
-    	        success: function (entities) {
-    	        	if(entities.length == 0){
-    	        		$('#feedback-failure').html("No elements with "+filter+": " + value+ " have been found.");
-        	        	$("#feedback-failure").delay(3).fadeIn();
-        	        	$("#feedback-failure").delay(6000).fadeOut();
-    	        	}
-    	        	else{
-    	        		$("li").remove();
-	    	            $.each(entities, function(i, entity){
-	    	                addEntity(entity);
-	    	            })
-	    	            
-	    	            $('#feedback').html("Elements with " + filter + ": " + value + " have been found.");
-	    	    	    $("#feedback").delay(3).fadeIn();
-	    	    	    $("#feedback").delay(6000).fadeOut();
-    	        	}
-
-    	        },
-    	        error: function(error) {
-
-    	        	$.ajax({
-    	                type: "GET",
-    	                contentType: "application/json",
-    	                url: "https://localhost:44321/api/User/ListAll",
-    	                headers: {
-    	                    "AuthToken": token
-    	                },
-    	                data: "",
-    	                dataType: 'json',
-    	                cache: false,
-    	                timeout: 600000,
-    	                success: function (entities) {
-    	                    $.each(entities, function(i, entity){
-    	                        addEntity(entity);
-    	                    })
-
-    	                },
-    	                error: function(error) {
-
-    	                    alert("<p>Well, this is awkward. :/</p>");
-    	                    
-    	                }
-    	            });
-    	        	
-    	        	$('#feedback-failure').html("No elements with "+filter+": " + value+ " have been found.");
-    	        	$("#feedback-failure").delay(3).fadeIn();
-    	        	$("#feedback-failure").delay(6000).fadeOut();
-    	        	
-    	        }
-    	    });
+    		sendGetRequest(searchUrl, function (users) {
+	        	if(users.length == 0){
+	        		
+	        		renderResponeMessage('#feedback-failure', 
+	        				"The user you have been looking for hasn't been found. ");
+	        	}
+	        	else{
+	        		
+	        		$("li").remove();
+	        		
+    	            $.each(users, function(i, user){
+    	                renderTemplate(entitiesTemplate, user, $entities);
+    	            })
+    	            
+    	            renderResponeMessage('#feedback', 
+    	            		"The user you have been looking for has been found. ");
+	        	}
+	        });
     	}
     });
-    
-    $.ajax({
-        type: "GET",
-        contentType: "application/json",
-        url: "https://localhost:44321/api/User/ListAll",
-        headers: {
-            "AuthToken": token
-        },
-        data: "",
-        dataType: 'json',
-        cache: false,
-        timeout: 600000,
-        success: function (entities) {
-            $.each(entities, function(i, entity){
-                addEntity(entity);
-            })
 
-        },
-        error: function(error) {
-
-            alert("<p>Well, this is awkward. :/</p>");
-            
-        }
-    });
-
+    /* This function sends a delete request for the current user container('li')
+     * that the event .remove was triggered on. If everything goes successfully 
+     * the user gets removed manually. */
     $entities.delegate('.remove', 'click', function(){
         var $li = $(this).closest('li');
-        var self = this;
         var id = parseInt($li.find('span.identifier').html());
 
-        $.ajax({
-            type: 'DELETE',
-            headers: {
-                "AuthToken": token
-            },
-            url:"https://localhost:44321/api/User/Delete/" + id,
-            success: function(Response){
-                $li.fadeOut(300, function(){
-                    $(this).remove();
-                });
+        sendDeleteRequest("User/Delete/" + id, function(Response){
+        	
+            $li.fadeOut(300, function(){
+                $(this).remove();
+            });
 
-                $("#feedback").html(Response);
-                $("#feedback").delay(3).fadeIn();
-                $("#feedback").delay(6000).fadeOut();
-            }
+            renderResponeMessage('#feedback', Response);
         });
     });
 
+    /* This script enables user editing by 
+     * changing the non-editable span fields to form inputs. */
     $entities.delegate('.editEntity', 'click', function(){
         var $li = $(this).closest('li');
         $li.find('input.name').val($li.find('span.name').html());
         $li.find('input.pass').val($li.find('span.pass').html());
+        
         $li.addClass('edit');
+        
+        var currentStatus = $li.find('span.staName').html();
+        $dropdownStatus = $li.find('select.staName');
+        
+        sendGetRequest("UserStatus/ListAll", function(statuses){
+        	
+    		$.each(statuses, function() {
+    			
+    			var option = $('<option data-toggle="tooltip" data-placement="top" title="'
+    					+ this.description +'"/>').val(this.id)
+    						.text(this.name);
+    			
+                if(this.name == currentStatus)
+                {
+                	$dropdownStatus.append(option.attr('selected', 'selected'));
+                }
+                else $dropdownStatus.append(option);
+            });
+    	});
     });
 
+    /* The script below disables user editing by removing the edit class
+     * and changing the form input fields back to non-editable spans. */
     $entities.delegate('.cancelEdit', 'click', function(){
+    	var $li = $(this).closest('li');
         $(this).closest('li').removeClass('edit');
+        
+        $dropdownStatus = $li.find('select.staName option');
+        $dropdownStatus.remove();
     });
 
+    /* This script collects the user edit form input fields and sends 
+     * an update, after which manually swaps the old user data with the new updated
+     * information. */
     $entities.delegate('.saveEdit', 'click', function(){
         var $li = $(this).closest('li');
         var id = parseInt($li.find('span.identifier').html());
+        var pass = $li.find('input.pass').val();
 
         var user = {
             userName: $li.find('input.name').val(),
-            password: $li.find('input.pass').val(),
-            statusId: parseInt($li.find('span.statusId').html()),
+            password: pass,
+            statusId: parseInt($li.find('select.staName option:selected').val()),
             active: 1
         }
-
-        $.ajax({
-        type: "PUT",
-        contentType: "application/json",
-        url: "https://localhost:44321/api/User/UpdateItem/" + id,
-        headers: {
-            "AuthToken": token
-        },
-        data: JSON.stringify(user),
-        dataType: 'json',
-        cache: false,
-        timeout: 600000,
-        success: function (Response) {
-            $li.find('span.name').html(user.userName);
-            $li.find('span.pass').html("********");
-            $li.removeClass('edit');
-
-            $("#feedback").html(Response);
-            $("#feedback").delay(3).fadeIn();
-            $("#feedback").delay(6000).fadeOut();
-        },
-        error: function(error) {
-
-            alert(error.responseText);
-            
+        
+        if(pass.length == 0){
+        	renderResponeMessage("#feedback-failure", 
+        			"Please enter a password!");
         }
-        });
+        else{	
+	        sendPutRequest("User/UpdateItem/" + id, user, function (Response) {
+	            $li.find('span.name').html(user.userName);
+	            $li.find('span.pass').html("********");
+	            $li.find('span.staName').html($li.find('select.staName option:selected').text());
+	            
+	            $li.removeClass('edit');
+	
+	            renderResponeMessage("#feedback", Response);
+	            
+	            $dropdownStatus = $li.find('select.staName option');
+	            $dropdownStatus.remove();
+	        });
+        }
     });
 });

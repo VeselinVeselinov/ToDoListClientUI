@@ -1,0 +1,48 @@
+li p {
+    margin-left: 38%;
+}
+
+span.noedit {
+    font-size: 1.7rem;
+}
+
+button.editEntity.noedit.btn.btn-warning {
+    margin-left: 43%;
+    font-size: 1.5rem;
+}
+
+button.saveEdit.edit.btn.btn-warning {
+    font-size: 1.5rem;
+    margin-left: 36%;
+}
+
+button.cancelEdit.edit.btn.btn-warning {
+    font-size: 1.5rem;
+}
+
+input.edit.name.form-control {
+    margin-bottom: 5.8px;
+}
+
+#wrapper{
+	min-height: 443px;
+}
+
+ul li{
+	margin-top: 18px;
+}
+
+.jumbotron{
+	margin: 0.5rem;
+	padding: 0;
+	padding-bottom: 7px;
+}
+
+.display-4 {
+    font-size: 2.5rem;
+    font-family: DripFont;
+}
+
+.lead{
+	font-family: contentFont;
+}

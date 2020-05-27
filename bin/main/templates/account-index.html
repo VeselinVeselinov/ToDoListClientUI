@@ -15,7 +15,8 @@
 		crossorigin="anonymous">
 
         <!-- custom css -->
-        <link rel="stylesheet" href="\css\index-style-test.css">
+        <link rel="stylesheet" href="\css\common\base-list-style.css">
+        <link rel="stylesheet" href="\css\account\account-index-style.css">
     </head>
 
     <body>
@@ -61,9 +62,24 @@
 
             <div id="wrapper">
 				<div id="enter-message">
-			        <h1> My account - management panel</h1>
+			        <h1> My accounts - management panel</h1>
                 </div>
-                
+                <div id="functionsCtrl">
+                    <button type="button" class="btn btn-secondary btn-lg" id="add-acc"
+                    data-toggle="tooltip" data-placement="top" title="Because why not? ">Add another account</button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="list-all">List all my accounts</button>
+                    <form class="form-inline my-2 my-lg-0" id="search-tool">
+                    	<select class="form-control" id="select-attribute">
+					      <option data="name">Account name</option>
+					      <option data="firstName">First name</option>
+					      <option data="lastName">Last name</option>
+					      <option data="email">Email</option>
+					      <option data="phone">Phone</option>
+    					</select>
+                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick a filter and enter a value.." aria-label="Search" required>
+                        <button class="btn btn-secondary my-2 my-sm-0" id="search-submit">Search</button>
+                    </form>
+                </div>
                 <ul id="entities"></ul>
                 
                 <template id="entity-template">
@@ -116,7 +132,8 @@
 	                        </p>
 	                    </div>
                         <div class="img-section">
-                        	<img alt="https://cdn.dribbble.com/users/1963449/screenshots/5915645/404_not_found.png" src="{{description}}" class="img-fluid img-content">
+                        	<img alt="https://cdn.dribbble.com/users/1963449/screenshots/5915645/404_not_found.png" src="{{description}}" class="img-fluid img-content"
+                        	onerror="this.src='/img/error/img-error.png'">
                         </div>
                   	</div>      
                         <button class="remove btn btn-warning">Delete</button>
@@ -135,8 +152,8 @@
                         <span>Hello, User</span>
                         <span sec:authentication="name" class="super-secure" id="identifier"></span>
                         <a class="nav-link" th:href="@{/account/index(authToken=${param.authToken})}">Account</a>
-                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">User - admin panel</a>
-			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Account - admin panel</a>
+                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Users - admin</a>
+			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Accounts - admin</a>
                         <a th:href="@{/menu/logout(authToken=${param.authToken})}" class="nav-link">Log out</a>
 			        </div>
 		        </div>
@@ -149,6 +166,10 @@
                 border-radius: 5px; background-color: rgba(52, 58, 64, 0.9); margin-top:15px;">
             <p class="h2" th:text="${#execInfo.now.time}">- Vezo's To Do List</p>
         </footer>
+        
+        <!-- handlers -->
+        <script src="/js/common/RequestHandler.js"></script>
+        <script src="/js/common/RenderHandler.js"></script>
         
         <!-- custom js -->
         <script src="/js/account/account-index-script.js"></script>

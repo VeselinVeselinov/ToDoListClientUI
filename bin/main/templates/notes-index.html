@@ -15,7 +15,7 @@
 		crossorigin="anonymous">
 
         <!-- custom css -->
-        <link rel="stylesheet" href="\css\index-style-test.css">
+        <link rel="stylesheet" href="\css\common\base-list-style.css">
         <link rel="stylesheet" href="\css\note\note-style.css">
     </head>
 
@@ -49,6 +49,11 @@
         
         <div class="sticky-top">
             <h1 id="feedback-failure" class="noedit">
+            </h1>
+        </div>
+        
+        <div class="sticky-top">
+            <h1 id="feedback-warning" class="noedit">
             </h1>
         </div>
 
@@ -85,23 +90,36 @@
 				<div id="enter-message">
 			        <h1> My notes - management panel</h1>
                 </div>
+                <div id="account-chosement">
+                </div>
                 <div id="functionsCtrl">
                     <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add quick note</button>
                     <button type="button" class="btn btn-secondary btn-lg" id="add-note-typed" data-toggle="modal" data-target="#modal-note-type">Add typed note</button>
                     <button type="button" class="btn btn-secondary btn-lg" id="list-all">List all my notes</button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="switchAcc">Switch accounts</button>
                     <form class="form-inline my-2 my-lg-0" id="search-tool">
-                    	<select class="form-control" id="select-attribute">
-					      <option data="text">Text</option>
-					      <option data="name">Note name</option>
-					      <option data="categoryName">Category</option>
-					      <option data="typeName">Type</option>
+                    	<select class="form-control" id="select-attribute"
+                    	data-toggle="tooltip" data-placement="top" title="Choose a filter you wish to search by. ">
+					      <option data="Content">Text</option>
+					      <option data="Name">Note name</option>
+					      <option data="Category">Category</option>
+					      <option data="Type">Type</option>
     					</select>
-                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick a filter and enter a value.." aria-label="Search" required>
+                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick and enter a value.." aria-label="Search" required
+                        >
                         <button class="btn btn-secondary my-2 my-sm-0" id="search-submit">Search</button>
                     </form>
                 </div>
                 
                 <ul id="entities"></ul>
+                
+                <template id="profile-pick-template">
+                	<figure class="figure pick-acc" data-account="{{id}}">
+  						<img alt="The image cannot be accessed." src="{{description}}" class="img-fluid img-content rounded"
+  						onerror="this.src='/img/error/img-error.png'">
+  						<figcaption class="figure-caption">{{name}}, {{email}}</figcaption>
+					</figure>
+                </template>
                 
                 <template id="types-template">
                 	<button type="button" data-id="{{id}}" class="btn btn-warning choose-ntype" >{{name}}</button>
@@ -261,8 +279,8 @@
                         <button class="super-secure" id="image-note-add"></button>
                         <button class="super-secure" id="todolist-add"></button>
                         <a class="nav-link" th:href="@{/account/index(authToken=${param.authToken})}">Account</a>
-                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">User - admin panel</a>
-			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Account - admin panel</a>
+                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Users - admin</a>
+			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Accounts - admin</a>
                         <a th:href="@{/menu/logout(authToken=${param.authToken})}" class="nav-link">Log out</a>
 			        </div>
 		        </div>
@@ -278,8 +296,8 @@
         </div>
         
         <!-- handlers -->
-        <script src="/js/note/request-handler.js"></script>
         <script src="/js/common/RenderHandler.js"></script>
+        <script src="/js/common/RequestHandler.js"></script>
         
         <!-- custom js -->
         <script src="/js/note/note-index.js"></script>

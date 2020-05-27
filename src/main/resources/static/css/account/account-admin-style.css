@@ -9,3 +9,15 @@ div.content-img-notet input{
 div.content-img-notet select{
 	width: 58%;
 }
+
+#add-acc {
+    font-size: 1.4rem;
+    width: 20%;
+}
+
+#list-all {
+	font-size: 1.4rem;
+    margin-left: 10px;
+    float: left;
+    width: 20%;
+}

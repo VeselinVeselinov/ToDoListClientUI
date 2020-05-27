@@ -15,7 +15,7 @@
 		crossorigin="anonymous">
 
         <!-- custom css -->
-        <link rel="stylesheet" href="\css\index-style-test.css">
+        <link rel="stylesheet" href="\css\common\base-list-style.css">
     	<link rel="stylesheet" href="\css\account\account-admin-style.css">
     </head>
 
@@ -66,7 +66,8 @@
                 </div>
 
                 <div id="functionsCtrl">
-                    <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add account</button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add a new account</button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="list-all">Show all system accounts</button>
                     <form class="form-inline my-2 my-lg-0" id="search-tool">
                     	<select class="form-control" id="select-attribute">
 					      <option data="name">Account name</option>
@@ -76,7 +77,7 @@
 					      <option data="phone">Phone</option>
 					      <option data="address">Address</option>
     					</select>
-                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick a filter and enter a value.." aria-label="Search" required>
+                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick and enter a value.." aria-label="Search" required>
                         <button class="btn btn-secondary my-2 my-sm-0" id="search-submit">Search</button>
                     </form>
                 </div>
@@ -150,8 +151,8 @@
 			        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <span>Hello, User</span>
                         <a class="nav-link" th:href="@{/account/index(authToken=${param.authToken})}">Account</a>
-                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">User - admin panel</a>
-			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Account - admin panel</a>
+                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Users - admin</a>
+			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Accounts - admin</a>
                         <a th:href="@{/menu/logout(authToken=${param.authToken})}" class="nav-link">Log out</a>
 			        </div>
 		        </div>
@@ -170,7 +171,7 @@
         <script src="/js/common/RenderHandler.js"></script>
         
         <!-- custom js -->
-        <script src="/js/test/index-script-test.js"></script>
+        <script src="/js/account/account-admin.js"></script>
 
         <!-- mustache script -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>

@@ -1,0 +1,21 @@
+textarea.edit.content.form-control {
+	min-height: 150px;
+}
+
+textarea.noedit.content.form-control {
+	min-height: 150px;
+}
+
+#add-acc{
+	width: 20%;
+	font-size: 1.4rem;
+}
+
+#list-all{
+	width: 20%;
+	font-size: 1.4rem;
+}
+
+input.form-control.mr-sm-2 {
+	font-size: 1.4rem;
+}

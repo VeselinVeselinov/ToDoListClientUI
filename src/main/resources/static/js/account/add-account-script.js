@@ -3,6 +3,7 @@ $(document).ready(function () {
     $('#register').submit(function (event) {
 
         event.preventDefault();
+        
         sendRegisterRequest();
 
     });
@@ -20,8 +21,12 @@ function sendRegisterRequest() {
 	var phone = $("#phone").val();
 	var address = $("#address").val();
 	var profilePic = $("#description").val();
+	
+	checkIfEmpty(address);
+	checkIfEmpty(phone);
 
 	var account = {
+		code: "ADMNCREATED",
 		name: username,
         firstName: fname,
 		lastName: lname,
@@ -30,11 +35,11 @@ function sendRegisterRequest() {
         address: address,
         description: profilePic 
     };
-
+	
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "https://localhost:44321/api/AccountService/AddItem",
+        url: "https://localhost:44321/api/Acc/AddItem",
         headers: {
             "AuthToken": token
         },
@@ -55,4 +60,10 @@ function sendRegisterRequest() {
         }
     });
 
+}
+
+function checkIfEmpty(element){
+	if (element == null) {
+		element = "-";
+	}
 }

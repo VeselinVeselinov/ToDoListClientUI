@@ -10,19 +10,19 @@ public class AccountService
 	@GetMapping("/account/index")
 	public String index(@RequestParam(name = "authToken")String token)
 	{
-		return "accindex";
+		return "account-index";
 	}
 	
 	@GetMapping("/accountadmin/index")
 	public String index2(@RequestParam(name = "authToken")String token)
 	{
-		return "index-test";
+		return "account-admin";
 	}
 	
 	@GetMapping("/account/add")
 	public String add(@RequestParam(name = "authToken")String token)
 	{
-		return "acc-add";
+		return "account-add";
 	}
 	
 }

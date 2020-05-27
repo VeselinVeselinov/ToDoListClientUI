@@ -23,7 +23,9 @@ function sendGetRequest(url, successCallback){
         timeout: 600000,
         success: successCallback,
         error: function(error) {
-        	alert(error.responseText);
+        	$('#feedback-failure').html(error.responseText);
+        	$('#feedback-failure').delay(98).fadeIn();
+        	$('#feedback-failure').delay(1968).fadeOut();
         }
         
     });
@@ -46,7 +48,9 @@ function sendPostRequest(url, entity, successCallback){
         timeout: 600000,
         success: successCallback,
         error: function(error) {
-        	alert(error.responseText);
+        	$('#feedback-failure').html(error.responseText);
+        	$('#feedback-failure').delay(98).fadeIn();
+        	$('#feedback-failure').delay(1968).fadeOut();
         }
         
     });
@@ -69,7 +73,9 @@ function sendPutRequest(url, entity, successCallback){
         timeout: 600000,
         success: successCallback,
         error: function(error) {
-        	alert(error.responseText);
+        	$('#feedback-failure').html(error.responseText);
+        	$('#feedback-failure').delay(98).fadeIn();
+        	$('#feedback-failure').delay(1968).fadeOut();
         }
         
     });
@@ -87,7 +93,9 @@ function sendDeleteRequest(url, successCallback){
         url:"https://localhost:44321/api/" + url,
         success: successCallback,
         error: function(error){
-        	alert(error.responseText);
+        	$('#feedback-failure').html(error.responseText);
+        	$('#feedback-failure').delay(98).fadeIn();
+        	$('#feedback-failure').delay(1968).fadeOut();
         }
         
     });

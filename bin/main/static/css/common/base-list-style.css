@@ -58,7 +58,7 @@ body{
 #add-acc{
 	margin-right: 10px;
 	float:left;
-	width: 15%;
+	width: 12%;
 }
 
 #add-user{
@@ -68,7 +68,7 @@ body{
 
 #search-tool{
 	float:right;
-	width:52%;
+	width:48%;
 }
 
 #functionsCtrl{
@@ -100,7 +100,7 @@ input.form-control.mr-sm-2 {
 
 button.btn.btn-secondary.my-2.my-sm-0 {
 	font-size: 1.4rem;
-    width: 18%;
+    width: 14%;
 }
 
 #main-menu a{

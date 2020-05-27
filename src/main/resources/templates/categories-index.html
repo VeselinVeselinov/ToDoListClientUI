@@ -15,30 +15,19 @@
 		crossorigin="anonymous">
 
         <!-- custom css -->
-        <link rel="stylesheet" href="\css\index-style-test.css">
+        <link rel="stylesheet" href="\css\common\base-list-style.css">
+        <link rel="stylesheet" href="\css\category\category-style.css">
     </head>
 
     <body>
 
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(21,255,23,0.9);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback" class="noedit">
+            <h1 id="feedback" class="noedit">
             </h1>
         </div>
         
         <div class="sticky-top">
-            <h1 style="text-align: center;
-                padding: 10px;
-                background: rgba(255,21,23,0.8);
-                color: rgb(247,247,247);
-                font-family: DripFont;
-                margin-bottom:0px;
-                padding-bottom:21px;" id="feedback-failure" class="noedit">
+            <h1 id="feedback-failure" class="noedit">
             </h1>
         </div>
 
@@ -77,13 +66,14 @@
                 </div>
 
                 <div id="functionsCtrl">
-                    <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add category</button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="add-acc">Add a new category</button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="list-all">List all categories</button>
                     <form class="form-inline my-2 my-lg-0" id="search-tool">
                     	<select class="form-control" id="select-attribute">
-					      <option data="desc">Description</option>
-					      <option data="categoryName">Category</option>
+                    		<option data="name">Category</option>
+					     	<option data="description">Description</option>
     					</select>
-                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick a filter and enter a value.." aria-label="Search" required>
+                        <input class="form-control mr-sm-2" type="search" placeholder="◄ Pick and enter a value.." aria-label="Search" required>
                         <button class="btn btn-secondary my-2 my-sm-0" id="search-submit">Search</button>
                     </form>
                 </div>
@@ -98,8 +88,8 @@
                         </p>
                         <p>
                             <strong>Description: </strong>
-                            <textarea class="noedit content form-control" readonly style="min-height:150px;">{{description}}</textarea>
-                            <textarea class="edit content form-control" style="min-height:150px;"></textarea>
+                            <textarea class="noedit content form-control" readonly>{{description}}</textarea>
+                            <textarea class="edit content form-control"></textarea>
                         </p>
                         
                         <p>
@@ -120,8 +110,8 @@
                         <span sec:authentication="name" class="super-secure" id="identifier"></span>
                         <span class="super-secure" id="identifierAcc"></span>
                         <a class="nav-link" th:href="@{/account/index(authToken=${param.authToken})}">Account</a>
-                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">User - admin panel</a>
-			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Account - admin panel</a>
+                        <a class="nav-link" th:href="@{/useradmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Users - admin</a>
+			  			<a class="nav-link" th:href="@{/accountadmin/index(authToken=${param.authToken})}" sec:authorize="hasRole('ROLE_ADMIN')">Accounts - admin</a>
                         <a th:href="@{/menu/logout(authToken=${param.authToken})}" class="nav-link">Log out</a>
 			        </div>
 		        </div>
@@ -134,6 +124,10 @@
                 border-radius: 5px; background-color: rgba(52, 58, 64, 0.9); margin-top:15px;">
             <p class="h2" th:text="${#execInfo.now.time}">- Vezo's To Do List</p>
         </footer>
+        
+        <!-- handlers -->
+        <script src="/js/common/RequestHandler.js"></script>
+        <script src="/js/common/RenderHandler.js"></script>
         
         <!-- custom js -->
         <script src="/js/category/category-index.js"></script>

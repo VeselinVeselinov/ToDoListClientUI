@@ -5,8 +5,6 @@
  * It utilizes jquery to manipulate the dom tree so that different html elements can be 
  * easily accessed. Ajax is used for request sending and Mustache.js for template rendering
  * so that the api response could be properly presented to the client.*/
-
-
 $(function (){
 	
 	/* This function handles how the search request result list will be displayed. */
@@ -29,9 +27,10 @@ $(function (){
 	
 	/*currently logged user's id*/
     const id = parseInt($('#identifier').html());
-    const initalRenderSeedUrl = "AccountService/FindExt?fieldName=userid&value=" + id;
+    const initalRenderSeedUrl = "Acc/FindExt?fieldName=userid&value=" + id;
     
     /*containers*/
+    var $accPick = $('#account-chosement');
     var $entities = $('#entities');
     var $types = $('#types-mb');
     
@@ -42,6 +41,7 @@ $(function (){
     var imgNoteTemplate = $('#img-note-template').html();
     var toDoListTemplate = $('#todolist-template').html();
     var taskTemplate = $('#note-tasks-template').html();
+    var accountTemplate = $('#profile-pick-template').html();
     
     /* The script below heavily relies on the renderTemplate function
         and it's used to handle the rendering of the different note types. */
@@ -77,17 +77,41 @@ $(function (){
     	}
     }
     
-    /* The script below renders the account's notes when the page loads. */
+    /* The script below renders the user's accounts when the page loads. */
     sendGetRequest(initalRenderSeedUrl, function (entities) {
-    	$("#identifierAcc").html(entities[0].id);
-    	var noteUrl = "Note/FindExt?fieldName=accountid&value=" + entities[0].id;
+    	renderResponeMessage('#feedback-warning',
+			"Select an account.");
+    	$('#functionsCtrl').hide();
+    	$.each(entities, function(i, entity){
+    		renderTemplate(accountTemplate, entity, $accPick);
+    	 });
+    });
+    
+    $('[data-toggle="tooltip"]').tooltip();
+    
+    /* This script should allow the user to dynamically switch between his accounts
+     * and that is accomplished simply by reloading the page because that's when the account
+     * selection takes place.*/
+    $('#switchAcc').click(function(){
+    	location.reload();
+    })
+    
+    /* This script handles which notes to displayed 
+     * depending on the account button the user selects.*/
+    $accPick.delegate('.pick-acc', 'click', function(){
+    	var selectedAccount = $(this).closest('figure').data('account');
+    	$accPick.remove();
+    	$('#functionsCtrl').show();
+    	
+    	$("#identifierAcc").html(selectedAccount);
+    	var noteUrl = "Note/FindExt?fieldName=accountid&value=" + selectedAccount;
     	
     	sendGetRequest(noteUrl, function(notes){
     		$.each(notes, function(i, note){
     			renderDifferentNoteTypes(note);
         	 });
     	});
-    });
+	});
     
     /* The script below renders the note type buttons 
         in the dialog window when the modal opens. */
@@ -119,38 +143,10 @@ $(function (){
     	    		"Please enter a value in order to use the search tool.");
     	}
     	else{
-    		switch (filter) {
-			case "text":
-				var textSearchUrl = "Note/GetByIdAndContent?accountId=" + accId +
-					"&content=" + valueInput;
-				
-				sendGetRequest(textSearchUrl, renderSearchResponse);
-				break;
-				
-			case "name":
-				var nameSearchUrl = "Note/GetByIdAndName?accountId=" + accId +
-					"&name=" + valueInput;
-				
-				sendGetRequest(nameSearchUrl, renderSearchResponse);
-				break;
-				
-			case "categoryName":
-				var categorySearchUrl = "Note/GetByIdAndCategory?accountId=" + accId +
-					"&categoryName=" + valueInput;
-				
-				sendGetRequest(categorySearchUrl, renderSearchResponse);
-				break;
-				
-			case "typeName":
-				var typeSearchUrl = "Note/GetByIdAndType?accountId=" + accId +
-					"&typeName=" + valueInput;
-				
-				sendGetRequest(typeSearchUrl, renderSearchResponse);
-				break;
-
-			default:
-				break;
-			}
+    		var searchUrl = "Note/GetByIdAnd" + filter + "?accountId=" + accId +
+			"&" + filter + "=" + valueInput;
+    		
+    		sendGetRequest(searchUrl, renderSearchResponse);
     	}
     });
     
@@ -338,11 +334,16 @@ $(function (){
         
         sendGetRequest("Category/ListAll", function(categories){
     		$.each(categories, function() {
+    			
+    			var option = $('<option data-toggle="tooltip" data-placement="top" title="'
+    					+ this.description +'"/>').val(this.id)
+    						.text(this.name);
+    			
                 if(this.name == $categoryName)
                 {
-                	$dropdown.append($("<option selected/>").val(this.id).text(this.name));
+                	$dropdown.append(option.attr('selected', 'selected'));
                 }
-                else $dropdown.append($("<option />").val(this.id).text(this.name));
+                else $dropdown.append(option);
             });
     	});
     });
